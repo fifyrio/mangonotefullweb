@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  body {
+    @apply bg-dark-primary text-white font-sans min-h-screen;
+  }
+  
+  * {
+    @apply border-gray-600;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-mango-500 hover:bg-mango-600 text-black font-medium px-6 py-3 rounded-lg transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-dark-tertiary hover:bg-dark-surface text-white font-medium px-6 py-3 rounded-lg border border-gray-600 transition-colors;
+  }
+  
+  .input-field {
+    @apply bg-dark-tertiary border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-mango-500 transition-colors;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-dark-tertiary rounded-lg transition-colors cursor-pointer;
+  }
+  
+  .sidebar-item.active {
+    @apply text-mango-500 bg-dark-tertiary border-r-2 border-mango-500;
+  }
+}
