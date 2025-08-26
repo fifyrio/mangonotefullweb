@@ -76,33 +76,34 @@ export default function DashboardPage() {
       
       <main className="flex-1 overflow-hidden">
         {/* Header */}
-        <div className="bg-dark-secondary border-b border-gray-700 px-8 py-4">
+        <div className="glass-effect border-b border-white/5 px-8 py-6">
           <div className="flex items-center gap-2 text-sm text-gray-400">
-            <span>All notes</span>
-            <span>/</span>
-            <span>My notes</span>
+            <span className="font-medium">All notes</span>
+            <span className="opacity-50">/</span>
+            <span className="text-mango-400 font-medium">My notes</span>
           </div>
         </div>
 
-        <div className="p-8">
+        <div className="p-10">
           {/* New note section */}
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-white mb-8">New note</h2>
+          <div className="mb-16">
+            <h2 className="text-4xl font-bold text-gradient mb-10">New note</h2>
             
-            <div className="grid grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
               {noteCreationOptions.map((option) => (
                 <button
                   key={option.title}
                   onClick={() => setActiveModal(option.modalType)}
-                  className="bg-dark-tertiary hover:bg-dark-surface p-6 rounded-xl border border-gray-700 transition-colors group"
+                  className="card p-8 group relative overflow-hidden"
                 >
-                  <div className="text-center">
-                    <div className={`text-4xl mb-4 ${option.color} group-hover:scale-110 transition-transform`}>
+                  <div className="text-center relative z-10">
+                    <div className={`text-5xl mb-6 ${option.color} group-hover:scale-125 transition-all duration-500 drop-shadow-lg`}>
                       {option.icon}
                     </div>
-                    <h3 className="text-white font-semibold mb-2">{option.title}</h3>
-                    <p className="text-gray-400 text-sm">{option.description}</p>
+                    <h3 className="text-white font-bold mb-3 text-lg group-hover:text-mango-400 transition-colors duration-300">{option.title}</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">{option.description}</p>
                   </div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
               ))}
             </div>
@@ -110,33 +111,37 @@ export default function DashboardPage() {
 
           {/* My notes section */}
           <div>
-            <h2 className="text-3xl font-bold text-white mb-8">My notes</h2>
+            <h2 className="text-4xl font-bold text-gradient mb-10">My notes</h2>
             
-            <div className="space-y-4">
+            <div className="space-y-6">
               {recentNotes.map((note) => (
                 <Link
                   key={note.title}
                   href={note.href}
-                  className="block bg-dark-tertiary hover:bg-dark-surface p-6 rounded-xl border border-gray-700 transition-colors group"
+                  className="block card p-8 group relative overflow-hidden"
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between relative z-10">
                     <div className="flex-1">
-                      <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-mango-500 transition-colors">
+                      <h3 className="text-white font-bold text-xl mb-3 group-hover:text-mango-400 transition-colors duration-300">
                         {note.title}
                       </h3>
-                      <p className="text-gray-400 text-sm mb-3 line-clamp-2">
+                      <p className="text-gray-400 text-base mb-4 line-clamp-2 leading-relaxed">
                         {note.description}
                       </p>
-                      <p className="text-gray-500 text-xs">
-                        {note.date}
-                      </p>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-mango-500 rounded-full"></div>
+                        <p className="text-gray-500 text-sm font-medium">
+                          {note.date}
+                        </p>
+                      </div>
                     </div>
-                    <div className="ml-4 text-gray-400 group-hover:text-mango-500 transition-colors">
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="ml-8 text-gray-400 group-hover:text-mango-400 transition-all duration-300 transform group-hover:translate-x-2">
+                      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </div>
                   </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-mango-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </Link>
               ))}
             </div>

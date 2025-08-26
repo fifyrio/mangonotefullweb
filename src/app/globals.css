@@ -6,32 +6,57 @@
 
 @layer base {
   body {
-    @apply bg-dark-primary text-white font-sans min-h-screen;
+    @apply bg-dark-primary text-white font-sans min-h-screen antialiased;
   }
   
   * {
-    @apply border-gray-600;
+    @apply border-gray-600/20;
+  }
+  
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-mango-500 hover:bg-mango-600 text-black font-medium px-6 py-3 rounded-lg transition-colors;
+    @apply bg-gradient-to-r from-mango-500 to-mango-400 hover:from-mango-600 hover:to-mango-500 text-black font-semibold px-8 py-3.5 rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-mango-500/25 active:scale-[0.98];
   }
   
   .btn-secondary {
-    @apply bg-dark-tertiary hover:bg-dark-surface text-white font-medium px-6 py-3 rounded-lg border border-gray-600 transition-colors;
+    @apply bg-dark-tertiary/80 backdrop-blur-sm hover:bg-dark-surface text-white font-medium px-8 py-3.5 rounded-xl border border-gray-600/30 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-white/5 active:scale-[0.98];
   }
   
   .input-field {
-    @apply bg-dark-tertiary border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-mango-500 transition-colors;
+    @apply bg-dark-tertiary/60 backdrop-blur-sm border border-gray-600/30 rounded-xl px-5 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-mango-500/60 focus:bg-dark-tertiary transition-all duration-300 focus:shadow-lg focus:shadow-mango-500/10;
   }
   
   .sidebar-item {
-    @apply flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-dark-tertiary rounded-lg transition-colors cursor-pointer;
+    @apply flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-dark-tertiary/60 rounded-2xl transition-all duration-300 cursor-pointer relative overflow-hidden;
+  }
+  
+  .sidebar-item::before {
+    content: '';
+    @apply absolute left-0 top-0 w-1 h-full bg-mango-500 transition-all duration-300 transform scale-y-0 origin-top;
   }
   
   .sidebar-item.active {
-    @apply text-mango-500 bg-dark-tertiary border-r-2 border-mango-500;
+    @apply text-mango-500 bg-dark-tertiary/80 backdrop-blur-sm shadow-lg shadow-mango-500/10;
+  }
+  
+  .sidebar-item.active::before {
+    @apply scale-y-100;
+  }
+  
+  .card {
+    @apply bg-dark-tertiary/60 backdrop-blur-sm border border-gray-700/30 rounded-2xl transition-all duration-300 hover:bg-dark-surface/80 hover:border-gray-600/40 hover:shadow-xl hover:shadow-black/20 hover:transform hover:scale-[1.02];
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-xl bg-dark-secondary/80 border border-white/10;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent;
   }
 }
