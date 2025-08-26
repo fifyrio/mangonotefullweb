@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { put } from '@vercel/blob'
-import pdfParse from 'pdf-parse'
 import { v4 as uuidv4 } from 'uuid'
 import { query, queryOne } from '@/lib/database'
 import { AIService } from '@/lib/ai-service'
@@ -60,7 +59,8 @@ export async function POST(request: NextRequest) {
     // Convert file to buffer for processing
     const buffer = Buffer.from(await file.arrayBuffer())
 
-    // Extract text from PDF
+    // Extract text from PDF - dynamically import to avoid build issues
+    const pdfParse = (await import('pdf-parse')).default
     const pdfData = await pdfParse(buffer)
     const extractedText = pdfData.text
 
