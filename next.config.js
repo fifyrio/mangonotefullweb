@@ -1,5 +1,14 @@
+const withNextIntl = require('next-intl/plugin')(
+  // This is the default (also the `src` folder is supported out of the box)
+  './src/i18n.ts'
+);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    // Enable webpack build worker to avoid module resolution issues
+    webpackBuildWorker: true
+  },
   webpack: (config, { isServer }) => {
     if (isServer) {
       // Ignore pdf-parse test files during server build
@@ -14,8 +23,15 @@ const nextConfig = {
         fs: false,
       }
     }
+
+    // Fix module resolution issues with formatjs
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@formatjs/icu-messageformat-parser': require.resolve('@formatjs/icu-messageformat-parser'),
+    }
+    
     return config
   },
 }
 
-module.exports = nextConfig
+module.exports = withNextIntl(nextConfig);

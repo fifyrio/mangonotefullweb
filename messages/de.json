@@ -1,0 +1,121 @@
+{
+  "home": {
+    "title": "MangoNote",
+    "description": "Verwandeln Sie jede Quelle in ein umfassendes Lernset mit KI-gestützter Notizenerstellung, Mind Maps, Karteikarten und Quiz.",
+    "getStarted": "Loslegen",
+    "signIn": "Anmelden",
+    "skipToDashboard": "Zum Dashboard (Demo) →"
+  },
+  "auth": {
+    "signUp": {
+      "title": "Konto erstellen",
+      "subtitle": "Beginnen Sie Ihre Reise mit MangoNote",
+      "form": {
+        "name": "Vollständiger Name",
+        "email": "E-Mail-Adresse",
+        "password": "Passwort",
+        "confirmPassword": "Passwort bestätigen",
+        "createAccount": "Konto erstellen",
+        "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+        "signInLink": "Hier anmelden"
+      },
+      "social": {
+        "continueWithGoogle": "Mit Google fortfahren",
+        "continueWithApple": "Mit Apple fortfahren",
+        "or": "ODER"
+      }
+    },
+    "signIn": {
+      "title": "Willkommen zurück",
+      "subtitle": "Melden Sie sich bei Ihrem MangoNote-Konto an",
+      "form": {
+        "email": "E-Mail-Adresse",
+        "password": "Passwort",
+        "signIn": "Anmelden",
+        "forgotPassword": "Passwort vergessen?",
+        "dontHaveAccount": "Haben Sie kein Konto?",
+        "signUpLink": "Hier registrieren"
+      },
+      "social": {
+        "continueWithGoogle": "Mit Google fortfahren",
+        "continueWithApple": "Mit Apple fortfahren",
+        "or": "ODER"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "createNote": "Neue Notiz erstellen",
+    "recentNotes": "Letzte Notizen",
+    "uploadOptions": {
+      "pdf": "PDF hochladen",
+      "audio": "Audio hochladen",
+      "text": "Text schreiben"
+    }
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "allNotes": "Alle Notizen",
+    "createNewFolder": "Neuen Ordner erstellen",
+    "quizzes": "Quiz",
+    "calendar": "Kalender",
+    "support": "Support",
+    "usageMeter": "Nutzungsmesser",
+    "upgradePlan": "Plan upgraden",
+    "settings": "Einstellungen"
+  },
+  "notes": {
+    "tabs": {
+      "summary": "Zusammenfassung & Notizen",
+      "mindMap": "Mind Map",
+      "flashcards": "Karteikarten",
+      "quiz": "Quiz"
+    },
+    "actions": {
+      "export": "Exportieren",
+      "rename": "Umbenennen",
+      "delete": "Löschen"
+    }
+  },
+  "processing": {
+    "title": "Verarbeitung Ihrer Inhalte",
+    "steps": {
+      "upload": "Upload abgeschlossen",
+      "analyze": "Inhalt analysieren",
+      "generate": "Lernmaterialien erstellen",
+      "complete": "Fertig!"
+    }
+  },
+  "modals": {
+    "uploadPDF": {
+      "title": "PDF hochladen",
+      "dragText": "PDF-Datei per Drag & Drop oder Klick hochladen",
+      "supportedFormats": "Unterstützte Formate: pdf",
+      "noteLanguage": "Notizsprache",
+      "autoDetect": "Automatisch erkennen",
+      "autoDetectDescription": "Sie können die KI-Auto-Erkennung verwenden, um die Audio-Sprache und Notizgenerierungssprache zu erkennen.",
+      "processingPDF": "PDF wird verarbeitet...",
+      "generateNote": "Notiz erstellen"
+    },
+    "uploadAudio": {
+      "title": "Audio hochladen",
+      "dragText": "Audio-Datei per Drag & Drop oder Klick hochladen",
+      "supportedFormats": "Unterstützte Formate: mp3, wav, m4a",
+      "processingAudio": "Audio wird verarbeitet...",
+      "generateNote": "Notiz erstellen"
+    },
+    "recordAudio": {
+      "title": "Audio aufnehmen",
+      "startRecording": "Aufnahme starten",
+      "stopRecording": "Aufnahme stoppen",
+      "processingAudio": "Audio wird verarbeitet...",
+      "generateNote": "Notiz erstellen"
+    },
+    "youtubeVideo": {
+      "title": "YouTube Video",
+      "urlPlaceholder": "YouTube Video URL hier einfügen...",
+      "processingVideo": "Video wird verarbeitet...",
+      "generateNote": "Notiz erstellen"
+    }
+  }
+}

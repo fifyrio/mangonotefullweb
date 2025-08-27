@@ -1,0 +1,121 @@
+{
+  "home": {
+    "title": "MangoNote",
+    "description": "Transform any source into a comprehensive study set with AI-powered note generation, mind maps, flashcards, and quizzes.",
+    "getStarted": "Get Started",
+    "signIn": "Sign In",
+    "skipToDashboard": "Skip to Dashboard (Demo) →"
+  },
+  "auth": {
+    "signUp": {
+      "title": "Create Account",
+      "subtitle": "Start your journey with MangoNote",
+      "form": {
+        "name": "Full Name",
+        "email": "Email Address", 
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "createAccount": "Create Account",
+        "alreadyHaveAccount": "Already have an account?",
+        "signInLink": "Sign in here"
+      },
+      "social": {
+        "continueWithGoogle": "Continue with Google",
+        "continueWithApple": "Continue with Apple",
+        "or": "OR"
+      }
+    },
+    "signIn": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to your MangoNote account",
+      "form": {
+        "email": "Email Address",
+        "password": "Password", 
+        "signIn": "Sign In",
+        "forgotPassword": "Forgot password?",
+        "dontHaveAccount": "Don't have an account?",
+        "signUpLink": "Sign up here"
+      },
+      "social": {
+        "continueWithGoogle": "Continue with Google",
+        "continueWithApple": "Continue with Apple",
+        "or": "OR"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "createNote": "Create New Note",
+    "recentNotes": "Recent Notes",
+    "uploadOptions": {
+      "pdf": "Upload PDF",
+      "audio": "Upload Audio", 
+      "text": "Write Text"
+    }
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "allNotes": "All Notes",
+    "createNewFolder": "Create new folder",
+    "quizzes": "Quizzes",
+    "calendar": "Calendar",
+    "support": "Support",
+    "usageMeter": "Usage Meter",
+    "upgradePlan": "Upgrade plan",
+    "settings": "Settings"
+  },
+  "notes": {
+    "tabs": {
+      "summary": "Summary & Notes",
+      "mindMap": "Mind Map", 
+      "flashcards": "Flashcards",
+      "quiz": "Quiz"
+    },
+    "actions": {
+      "export": "Export",
+      "rename": "Rename",
+      "delete": "Delete"
+    }
+  },
+  "processing": {
+    "title": "Processing Your Content",
+    "steps": {
+      "upload": "Upload Complete",
+      "analyze": "Analyzing Content",
+      "generate": "Generating Study Materials",
+      "complete": "Ready!"
+    }
+  },
+  "modals": {
+    "uploadPDF": {
+      "title": "Upload PDF",
+      "dragText": "Drag or click to upload your PDF file",
+      "supportedFormats": "Supported formats: pdf",
+      "noteLanguage": "Note language",
+      "autoDetect": "Auto detect",
+      "autoDetectDescription": "You can use AI auto-detect to detect the audio language and note generation language.",
+      "processingPDF": "Processing PDF...",
+      "generateNote": "Generate note"
+    },
+    "uploadAudio": {
+      "title": "Upload Audio",
+      "dragText": "Drag or click to upload your audio file",
+      "supportedFormats": "Supported formats: mp3, wav, m4a",
+      "processingAudio": "Processing Audio...",
+      "generateNote": "Generate note"
+    },
+    "recordAudio": {
+      "title": "Record Audio",
+      "startRecording": "Start Recording",
+      "stopRecording": "Stop Recording",
+      "processingAudio": "Processing Audio...",
+      "generateNote": "Generate note"
+    },
+    "youtubeVideo": {
+      "title": "YouTube Video",
+      "urlPlaceholder": "Paste YouTube video URL here...",
+      "processingVideo": "Processing Video...",
+      "generateNote": "Generate note"
+    }
+  }
+}

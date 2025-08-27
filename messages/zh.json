@@ -1,0 +1,121 @@
+{
+  "home": {
+    "title": "MangoNote",
+    "description": "使用AI驱动的笔记生成、思维导图、卡片和测验，将任何来源转换为综合学习资料。",
+    "getStarted": "开始使用",
+    "signIn": "登录",
+    "skipToDashboard": "跳转到仪表板（演示）→"
+  },
+  "auth": {
+    "signUp": {
+      "title": "创建账户",
+      "subtitle": "开始您的MangoNote之旅",
+      "form": {
+        "name": "姓名",
+        "email": "邮箱地址",
+        "password": "密码",
+        "confirmPassword": "确认密码",
+        "createAccount": "创建账户",
+        "alreadyHaveAccount": "已有账户？",
+        "signInLink": "点击登录"
+      },
+      "social": {
+        "continueWithGoogle": "使用Google继续",
+        "continueWithApple": "使用Apple继续",
+        "or": "或"
+      }
+    },
+    "signIn": {
+      "title": "欢迎回来",
+      "subtitle": "登录您的MangoNote账户",
+      "form": {
+        "email": "邮箱地址",
+        "password": "密码",
+        "signIn": "登录",
+        "forgotPassword": "忘记密码？",
+        "dontHaveAccount": "没有账户？",
+        "signUpLink": "点击注册"
+      },
+      "social": {
+        "continueWithGoogle": "使用Google继续",
+        "continueWithApple": "使用Apple继续",
+        "or": "或"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "仪表板",
+    "createNote": "创建新笔记",
+    "recentNotes": "最近笔记",
+    "uploadOptions": {
+      "pdf": "上传PDF",
+      "audio": "上传音频",
+      "text": "写文本"
+    }
+  },
+  "sidebar": {
+    "dashboard": "仪表板",
+    "allNotes": "所有笔记",
+    "createNewFolder": "创建新文件夹",
+    "quizzes": "测验",
+    "calendar": "日历",
+    "support": "支持",
+    "usageMeter": "使用统计",
+    "upgradePlan": "升级计划",
+    "settings": "设置"
+  },
+  "notes": {
+    "tabs": {
+      "summary": "摘要和笔记",
+      "mindMap": "思维导图",
+      "flashcards": "卡片",
+      "quiz": "测验"
+    },
+    "actions": {
+      "export": "导出",
+      "rename": "重命名",
+      "delete": "删除"
+    }
+  },
+  "processing": {
+    "title": "正在处理您的内容",
+    "steps": {
+      "upload": "上传完成",
+      "analyze": "分析内容",
+      "generate": "生成学习材料",
+      "complete": "完成！"
+    }
+  },
+  "modals": {
+    "uploadPDF": {
+      "title": "上传PDF",
+      "dragText": "拖拽或点击上传您的PDF文件",
+      "supportedFormats": "支持格式：pdf",
+      "noteLanguage": "笔记语言",
+      "autoDetect": "自动检测",
+      "autoDetectDescription": "您可以使用AI自动检测来检测音频语言和笔记生成语言。",
+      "processingPDF": "正在处理PDF...",
+      "generateNote": "生成笔记"
+    },
+    "uploadAudio": {
+      "title": "上传音频",
+      "dragText": "拖拽或点击上传您的音频文件",
+      "supportedFormats": "支持格式：mp3、wav、m4a",
+      "processingAudio": "正在处理音频...",
+      "generateNote": "生成笔记"
+    },
+    "recordAudio": {
+      "title": "录制音频",
+      "startRecording": "开始录制",
+      "stopRecording": "停止录制",
+      "processingAudio": "正在处理音频...",
+      "generateNote": "生成笔记"
+    },
+    "youtubeVideo": {
+      "title": "YouTube视频",
+      "urlPlaceholder": "在此粘贴YouTube视频链接...",
+      "processingVideo": "正在处理视频...",
+      "generateNote": "生成笔记"
+    }
+  }
+}

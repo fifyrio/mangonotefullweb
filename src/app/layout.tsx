@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import {ReactNode} from 'react';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -9,14 +10,16 @@ export const metadata: Metadata = {
   description: 'Transform any source into comprehensive study materials with AI-powered note generation, mind maps, flashcards, and quizzes.',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+type Props = {
+  children: ReactNode;
+};
+
+export default function RootLayout({children}: Props) {
   return (
-    <html lang="en" className="dark">
-      <body className={inter.className}>{children}</body>
+    <html className="dark" suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning>
+        {children}
+      </body>
     </html>
-  )
+  );
 }

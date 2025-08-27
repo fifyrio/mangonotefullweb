@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 interface SidebarProps {
   className?: string
@@ -9,28 +10,29 @@ interface SidebarProps {
 
 export default function Sidebar({ className = '' }: SidebarProps) {
   const pathname = usePathname()
+  const t = useTranslations('sidebar')
 
   const navigationItems = [
     {
-      name: 'All notes',
+      name: t('allNotes'),
       href: '/dashboard',
       icon: '📄',
       active: pathname === '/dashboard'
     },
     {
-      name: 'Create new folder',
+      name: t('createNewFolder'),
       href: '/dashboard/folders/new',
       icon: '📁',
       active: false
     },
     {
-      name: 'Quizzes',
+      name: t('quizzes'),
       href: '/dashboard/quizzes',
       icon: '❓',
       active: pathname === '/dashboard/quizzes'
     },
     {
-      name: 'Calendar',
+      name: t('calendar'),
       href: '/dashboard/calendar',
       icon: '📅',
       active: pathname === '/dashboard/calendar'
@@ -74,7 +76,7 @@ export default function Sidebar({ className = '' }: SidebarProps) {
           <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-gray-600/20 to-gray-700/20">
             <span className="text-lg">❓</span>
           </div>
-          <span className="text-sm font-medium">Support</span>
+          <span className="text-sm font-medium">{t('support')}</span>
         </Link>
       </div>
 
@@ -82,7 +84,7 @@ export default function Sidebar({ className = '' }: SidebarProps) {
       <div className="px-6 py-5 border-t border-white/5">
         <div className="mb-5">
           <div className="flex justify-between text-sm text-gray-400 mb-3">
-            <span className="font-medium">Usage Meter</span>
+            <span className="font-medium">{t('usageMeter')}</span>
             <span className="text-mango-400 font-semibold">3 / 5</span>
           </div>
           <div className="w-full bg-gray-700/50 rounded-full h-2.5 overflow-hidden">
@@ -92,7 +94,7 @@ export default function Sidebar({ className = '' }: SidebarProps) {
         
         <button className="btn-primary w-full flex items-center justify-center gap-2 text-sm">
           <span>🔓</span>
-          Upgrade plan
+{t('upgradePlan')}
         </button>
       </div>
 

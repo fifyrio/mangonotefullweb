@@ -19,6 +19,7 @@
     "fslightbox-react": "^2.0.0",
     "multer": "^2.0.2",
     "next": "14.0.1",
+    "next-intl": "^4.3.5",
     "pdf-parse": "^1.1.1",
     "pg": "^8.16.3",
     "react": "^18",

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface UploadPDFModalProps {
   isOpen: boolean
@@ -14,6 +15,7 @@ export default function UploadPDFModal({ isOpen, onClose, onGenerate }: UploadPD
   const [isUploading, setIsUploading] = useState(false)
   const [uploadError, setUploadError] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const t = useTranslations('modals.uploadPDF')
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault()
@@ -102,7 +104,7 @@ export default function UploadPDFModal({ isOpen, onClose, onGenerate }: UploadPD
         </button>
 
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-black mb-8">Upload PDF</h2>
+          <h2 className="text-2xl font-bold text-black mb-8">{t('title')}</h2>
           
           <div
             className={`border-2 border-dashed rounded-lg p-8 mb-6 cursor-pointer transition-colors ${
@@ -120,10 +122,10 @@ export default function UploadPDFModal({ isOpen, onClose, onGenerate }: UploadPD
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
               </svg>
               <p className="text-gray-600 font-medium mb-2">
-                Drag or click to upload your PDF file
+                {t('dragText')}
               </p>
               <p className="text-gray-500 text-sm">
-                Supported formats: pdf
+                {t('supportedFormats')}
               </p>
             </div>
           </div>
@@ -153,17 +155,17 @@ export default function UploadPDFModal({ isOpen, onClose, onGenerate }: UploadPD
 
           <div className="mb-6">
             <label className="block text-left text-black font-medium mb-2">
-              🧠 Note language
+              🧠 {t('noteLanguage')}
             </label>
             <select className="w-full p-3 border border-gray-300 rounded-lg bg-white text-black">
-              <option>🤖 Auto detect</option>
+              <option>🤖 {t('autoDetect')}</option>
               <option>🇺🇸 English</option>
               <option>🇨🇳 中文</option>
               <option>🇪🇸 Español</option>
               <option>🇫🇷 Français</option>
             </select>
             <p className="text-gray-500 text-sm mt-2">
-              You can use AI auto-detect to detect the audio language and note generation language.
+              {t('autoDetectDescription')}
             </p>
           </div>
 
@@ -179,14 +181,14 @@ export default function UploadPDFModal({ isOpen, onClose, onGenerate }: UploadPD
             {isUploading ? (
               <>
                 <div className="w-5 h-5 border-2 border-gray-500 border-t-transparent rounded-full animate-spin"></div>
-                Processing PDF...
+{t('processingPDF')}
               </>
             ) : (
               <>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
-                Generate note
+{t('generateNote')}
               </>
             )}
           </button>
