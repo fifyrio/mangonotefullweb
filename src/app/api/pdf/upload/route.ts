@@ -9,9 +9,11 @@ import { ErrorHandler } from '@/lib/error-handler'
 const DEMO_USER_ID = '550e8400-e29b-41d4-a716-446655440000'
 
 export async function POST(request: NextRequest) {
+  let file: File | null = null
+  
   try {
     const formData = await request.formData()
-    const file = formData.get('pdf') as File
+    file = formData.get('pdf') as File
     const folderId = formData.get('folderId') as string | null
 
     if (!file) {

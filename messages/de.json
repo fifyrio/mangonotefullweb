@@ -1,4 +1,11 @@
 {
+  "HomePage": {
+    "title": "MangoNote",
+    "description": "Verwandeln Sie jede Quelle in umfassende Lernmaterialien mit KI-gestützter Notizenerstellung, Mind Maps, Karteikarten und Quiz.",
+    "getStarted": "Loslegen",
+    "signIn": "Anmelden",
+    "skipToDashboard": "Zum Dashboard (Demo) →"
+  },
   "home": {
     "title": "MangoNote",
     "description": "Verwandeln Sie jede Quelle in ein umfassendes Lernset mit KI-gestützter Notizenerstellung, Mind Maps, Karteikarten und Quiz.",

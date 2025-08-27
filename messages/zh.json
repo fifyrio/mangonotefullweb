@@ -1,4 +1,11 @@
 {
+  "HomePage": {
+    "title": "MangoNote",
+    "description": "使用AI驱动的笔记生成、思维导图、闪卡和测验，将任何来源转换为全面的学习材料。",
+    "getStarted": "开始使用",
+    "signIn": "登录",
+    "skipToDashboard": "跳转到仪表板（演示）→"
+  },
   "home": {
     "title": "MangoNote",
     "description": "使用AI驱动的笔记生成、思维导图、卡片和测验，将任何来源转换为综合学习资料。",

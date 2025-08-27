@@ -1,4 +1,11 @@
 {
+  "HomePage": {
+    "title": "MangoNote",
+    "description": "Trasforma qualsiasi fonte in materiali di studio completi con generazione di appunti AI, mappe mentali, flashcard e quiz.",
+    "getStarted": "Inizia",
+    "signIn": "Accedi",
+    "skipToDashboard": "Vai al Dashboard (Demo) →"
+  },
   "home": {
     "title": "MangoNote",
     "description": "Trasforma qualsiasi fonte in un set di studio completo con generazione di appunti AI, mappe mentali, flashcard e quiz.",
