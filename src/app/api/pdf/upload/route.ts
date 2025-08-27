@@ -3,6 +3,7 @@ import { put } from '@vercel/blob'
 import { v4 as uuidv4 } from 'uuid'
 import { query, queryOne } from '@/lib/database'
 import { AIService } from '@/lib/ai-service'
+import { ErrorHandler } from '@/lib/error-handler'
 
 // For demo purposes, we'll use a mock user ID
 const DEMO_USER_ID = '550e8400-e29b-41d4-a716-446655440000'
@@ -79,8 +80,22 @@ export async function POST(request: NextRequest) {
     }
 
     // Analyze content with AI
-    const aiService = new AIService()
-    const analysisResult = await aiService.analyzeContent(extractedText)
+    let aiService: AIService
+    let analysisResult: any[]
+    
+    try {
+      aiService = new AIService()
+      analysisResult = await aiService.analyzeContent(extractedText)
+    } catch (aiError) {
+      ErrorHandler.logError(aiError as Error, 'pdf_upload_ai_analysis', {
+        fileName: file.name,
+        textLength: extractedText.length
+      })
+      
+      // Return AI error response
+      const errorResponse = ErrorHandler.createErrorResponse(aiError as Error)
+      return NextResponse.json(errorResponse, { status: 500 })
+    }
 
     // Get title for the note
     const titleItem = analysisResult.find((item) => item.type === 'title')
@@ -198,13 +213,12 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Failed to process PDF upload:', error)
-    return NextResponse.json(
-      { 
-        success: false, 
-        error: error instanceof Error ? error.message : 'Failed to process PDF' 
-      },
-      { status: 500 }
-    )
+    ErrorHandler.logError(error as Error, 'pdf_upload', {
+      fileName: file?.name,
+      fileSize: file?.size
+    })
+    
+    const errorResponse = ErrorHandler.createErrorResponse(error as Error)
+    return NextResponse.json(errorResponse, { status: 500 })
   }
 }
