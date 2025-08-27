@@ -112,6 +112,115 @@ The project uses Next.js 14 App Router with the following route structure:
 - Component-level CSS classes defined in globals.css
 - Inter font family loaded from Google Fonts
 
+## Internationalization (i18n) Best Practices
+
+The project uses next-intl with App Router following 2024-2025 best practices:
+
+### Configuration Structure
+```
+src/i18n/
+├── routing.ts      # Route configuration with defineRouting()
+├── request.ts      # Request configuration for getRequestConfig()
+├── navigation.ts   # Type-safe navigation utilities
+└── middleware.ts   # (optional) Custom middleware logic
+```
+
+### Key Implementation Patterns
+
+**Routing Configuration (`src/i18n/routing.ts`)**
+```typescript
+import {defineRouting} from 'next-intl/routing';
+
+export const routing = defineRouting({
+  locales: ['en', 'de', 'it', 'zh'],
+  defaultLocale: 'en',
+  localeDetection: false  // Force default language, prevent auto-detection
+});
+```
+
+**Middleware (`src/middleware.ts`)**
+```typescript
+import createMiddleware from 'next-intl/middleware';
+import {routing} from './i18n/routing';
+
+export default createMiddleware(routing);  // Use standard pattern
+
+export const config = {
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
+};
+```
+
+**Layout Optimization (`src/app/[locale]/layout.tsx`)**
+```typescript
+import {setRequestLocale} from 'next-intl/server';
+import {routing} from '@/i18n/routing';
+
+export default async function LocaleLayout({children, params}) {
+  const {locale} = await params;
+  setRequestLocale(locale);  // Enable static rendering
+  // ... rest of component
+}
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({locale}));
+}
+```
+
+**Type-Safe Navigation (`src/i18n/navigation.ts`)**
+```typescript
+import {createNavigation} from 'next-intl/navigation';
+import {routing} from './routing';
+
+export const {Link, redirect, usePathname, useRouter} = 
+  createNavigation(routing);
+```
+
+### Anti-Patterns to Avoid
+
+❌ **Don't hardcode redirects in middleware**
+```typescript
+// WRONG - Don't do this
+if (pathname === '/') {
+  return NextResponse.redirect(new URL('/en', request.url));
+}
+```
+
+❌ **Don't create unnecessary root pages**
+```typescript
+// WRONG - src/app/page.tsx shouldn't exist with [locale] structure
+export default function RootPage() {
+  redirect('/en');
+}
+```
+
+❌ **Don't mix custom logic with next-intl middleware**
+```typescript
+// WRONG - Keep middleware clean
+export default function middleware(request) {
+  // Custom logic here breaks the pattern
+  return intlMiddleware(request);
+}
+```
+
+### Correct Approaches
+
+✅ **Use configuration to control behavior**
+- Set `localeDetection: false` to force default language
+- Use `defaultLocale` for fallback behavior
+- Configure `localePrefix` for URL structure
+
+✅ **Follow standard middleware pattern**
+- Use `createMiddleware(routing)` directly
+- No custom logic in middleware
+- Let next-intl handle all routing decisions
+
+✅ **Optimize for static rendering**
+- Use `setRequestLocale()` in layouts
+- Add `generateStaticParams()` for locale paths
+- Handle async params correctly with `await params`
+
+This approach ensures optimal performance, maintainability, and compatibility with Next.js 14+ App Router features.
+
 ## Future Development Areas
 
 Based on `产品需求.md`, planned features include:

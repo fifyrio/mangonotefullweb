@@ -1,4 +1,11 @@
 {
+  "HomePage": {
+    "title": "MangoNote",
+    "description": "Transform any source into comprehensive study materials with AI-powered note generation, mind maps, flashcards, and quizzes.",
+    "getStarted": "Get Started", 
+    "signIn": "Sign In",
+    "skipToDashboard": "Skip to Dashboard (Demo) →"
+  },
   "home": {
     "title": "MangoNote",
     "description": "Transform any source into a comprehensive study set with AI-powered note generation, mind maps, flashcards, and quizzes.",
