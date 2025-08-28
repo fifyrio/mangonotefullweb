@@ -22,6 +22,12 @@ export default function Sidebar({ className = '', isLoggedIn = false }: SidebarP
       active: pathname === '/dashboard'
     },
     {
+      name: 'Review Flashcards',
+      href: '/flashcards',
+      icon: '🎴',
+      active: pathname === '/flashcards'
+    },
+    {
       name: t('createNewFolder'),
       href: '/dashboard/folders/new',
       icon: '📁',

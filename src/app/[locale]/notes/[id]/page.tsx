@@ -2,11 +2,14 @@
 
 import Sidebar from '@/components/Sidebar'
 import { useState } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function NoteDetailPage() {
   const params = useParams()
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState('summary')
+  const noteId = params.id as string
 
   const tabs = [
     { id: 'summary', name: 'Summary & Notes', active: activeTab === 'summary' },
@@ -120,13 +123,39 @@ export default function NoteDetailPage() {
 
           {activeTab === 'mindmap' && (
             <div className="text-center py-12">
-              <div className="text-gray-400 text-lg">Mind Map visualization coming soon...</div>
+              <div className="max-w-md mx-auto">
+                <div className="text-6xl mb-6">🧠</div>
+                <h3 className="text-xl font-bold text-white mb-4">Interactive Mind Map</h3>
+                <p className="text-gray-400 mb-6">
+                  Visualize concepts and their relationships in an interactive mind map generated from your note content.
+                </p>
+                <Link
+                  href={`/notes/${noteId}/mindmap`}
+                  className="btn-primary inline-flex items-center gap-2"
+                >
+                  <span>🧠</span>
+                  Open Mind Map
+                </Link>
+              </div>
             </div>
           )}
 
           {activeTab === 'flashcards' && (
             <div className="text-center py-12">
-              <div className="text-gray-400 text-lg">Flashcards feature coming soon...</div>
+              <div className="max-w-md mx-auto">
+                <div className="text-6xl mb-6">🎴</div>
+                <h3 className="text-xl font-bold text-white mb-4">Study Flashcards</h3>
+                <p className="text-gray-400 mb-6">
+                  Review and practice with AI-generated flashcards from your note content.
+                </p>
+                <Link
+                  href={`/notes/${noteId}/flashcards`}
+                  className="btn-primary inline-flex items-center gap-2"
+                >
+                  <span>🎴</span>
+                  Start Review
+                </Link>
+              </div>
             </div>
           )}
 

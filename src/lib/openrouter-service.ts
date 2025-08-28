@@ -132,40 +132,64 @@ Return only a JSON array of flashcards:
   }
 
   /**
-   * Build comprehensive analysis prompt
+   * Build comprehensive analysis prompt with improved pedagogy
    */
   private buildAnalysisPrompt(text: string): string {
-    return `Analyze the following content and create comprehensive study materials. Be thorough and educational.
+    const truncatedText = text.substring(0, 10000)
+    const wordCount = text.split(/\s+/).length
+    const estimatedReadingTime = Math.max(Math.ceil(wordCount / 200), 5) // 200 WPM average
+    
+    return `You are an expert educational content analyzer and learning specialist. Transform this content into comprehensive, pedagogically sound study materials that maximize learning effectiveness.
 
-CONTENT:
-${text}
+**CONTENT TO ANALYZE:**
+${truncatedText}${text.length > 10000 ? '\n\n[Content continues - analyze the full scope]' : ''}
 
-INSTRUCTIONS:
-1. Create a clear, comprehensive summary (200-400 words)
-2. Extract 5-8 key points as bullet points
-3. Generate 5-7 educational flashcards covering important concepts
-4. Assess difficulty level (easy/medium/hard)
+**YOUR MISSION:**
+Create study materials that help students:
+- **Understand** core concepts deeply
+- **Apply** knowledge practically  
+- **Remember** information long-term
+- **Succeed** in assessments
 
-Return your response in this EXACT JSON format (no markdown, no extra text):
+**REQUIRED OUTPUT FORMAT:**
+Return ONLY valid JSON with no markdown formatting or extra text:
+
 {
-  "summary": "Comprehensive summary here...",
+  "summary": "Write a comprehensive, well-structured summary that captures all major concepts, their relationships, and significance. Use clear topic sentences and logical flow. Make it digestible yet thorough (400-600 words).",
   "key_points": [
-    "First key point",
-    "Second key point",
-    "Third key point"
+    "Specific, actionable insight with concrete details and context",
+    "Clear principle that students can apply immediately with examples", 
+    "Important concept with real-world relevance and implications",
+    "Critical understanding that connects to broader themes",
+    "Advanced insight for deeper comprehension (if applicable)",
+    "Practical takeaway with implementation guidance"
   ],
   "flashcards": [
-    {"question": "What is the main concept?", "answer": "The main concept is..."},
-    {"question": "How does this work?", "answer": "It works by..."}
+    {"question": "What is the primary concept or principle explained in this content?", "answer": "Provide a clear, complete answer that demonstrates understanding"},
+    {"question": "How would you apply this knowledge in a real-world scenario?", "answer": "Give specific, practical application examples"},
+    {"question": "What are the key relationships between the main concepts discussed?", "answer": "Explain how ideas connect and influence each other"},
+    {"question": "What potential challenges or limitations should be considered?", "answer": "Address critical thinking about constraints and edge cases"},
+    {"question": "Why is this information important or significant?", "answer": "Explain the broader context and implications"},
+    {"question": "What examples or analogies help explain this concept?", "answer": "Provide memorable comparisons or concrete examples"}
   ],
-  "difficulty_level": "medium"
-}`
+  "difficulty_level": "easy|medium|hard"
+}
+
+**QUALITY STANDARDS:**
+- **Clarity**: Use precise, accessible language
+- **Depth**: Go beyond surface-level to meaningful insights
+- **Structure**: Organize information logically
+- **Engagement**: Make content interesting and relevant
+- **Accuracy**: Ensure all information is factually correct
+- **Completeness**: Cover all significant topics without redundancy
+
+Generate materials that would help someone master this content efficiently and thoroughly. Focus on learning outcomes, not just information transfer.`
   }
 
   /**
-   * Make API call to OpenRouter
+   * Make API call to OpenRouter (public method for mind map service)
    */
-  private async makeAPICall(prompt: string): Promise<string> {
+  async makeAPICall(prompt: string): Promise<string> {
     const controller = new AbortController()
     const timeoutId = setTimeout(() => controller.abort(), this.TIMEOUT_MS)
 
