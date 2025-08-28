@@ -302,3 +302,6 @@ Generate materials that would help someone master this content efficiently and t
     }
   }
 }
+
+// Export singleton instance
+export const openRouterService = new OpenRouterService();

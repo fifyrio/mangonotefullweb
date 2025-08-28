@@ -34,9 +34,9 @@ export default function DashboardPage() {
       color: 'text-red-400'
     },
     {
-      icon: '📁',
+      icon: '🎵',
       title: 'Upload audio',
-      description: 'Upload audio file',
+      description: 'AI-powered transcription',
       modalType: 'upload-audio',
       color: 'text-mango-500'
     },

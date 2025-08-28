@@ -36,6 +36,13 @@ export interface FlashcardWithProgress extends Flashcard {
   days_since_last_review?: number
 }
 
+export interface CreateFlashcardParams {
+  noteId: string
+  userId: string
+  question: string
+  answer: string
+}
+
 export class FlashcardService {
   private spacedRepetitionEngine: SpacedRepetitionEngine
 
@@ -412,4 +419,56 @@ export class FlashcardService {
       console.error('Failed to complete study session:', error)
     }
   }
+
+  /**
+   * Create a new flashcard
+   */
+  async createFlashcard(params: CreateFlashcardParams): Promise<Flashcard> {
+    try {
+      const result = await query(`
+        INSERT INTO flashcards (note_id, user_id, question, answer)
+        VALUES ($1, $2, $3, $4)
+        RETURNING *
+      `, [params.noteId, params.userId, params.question, params.answer])
+
+      const flashcards = result as unknown as any[]
+      if (flashcards.length === 0) {
+        throw new Error('Failed to create flashcard')
+      }
+
+      const flashcard = flashcards[0]
+      return {
+        id: flashcard.id,
+        note_id: flashcard.note_id,
+        user_id: flashcard.user_id,
+        question: flashcard.question,
+        answer: flashcard.answer,
+        created_at: flashcard.created_at
+      }
+    } catch (error) {
+      console.error('Failed to create flashcard:', error)
+      throw new Error('Failed to create flashcard')
+    }
+  }
+
+  /**
+   * Initialize spaced repetition tracking for a flashcard
+   */
+  async initializeSpacedRepetition(flashcardId: string, userId: string): Promise<void> {
+    try {
+      await query(`
+        INSERT INTO spaced_repetition (
+          flashcard_id, user_id, repetitions, easiness_factor, 
+          interval_days, next_review_date, is_new
+        ) VALUES ($1, $2, 0, 2.5, 1, CURRENT_TIMESTAMP, TRUE)
+        ON CONFLICT (flashcard_id, user_id) DO NOTHING
+      `, [flashcardId, userId])
+    } catch (error) {
+      console.error('Failed to initialize spaced repetition:', error)
+      throw new Error('Failed to initialize spaced repetition')
+    }
+  }
 }
+
+// Export singleton instance
+export const flashcardService = new FlashcardService();

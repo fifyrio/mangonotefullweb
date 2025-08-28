@@ -21,6 +21,39 @@ export interface NoteSummary extends Note {
   preview: string
 }
 
+export interface CreateNoteParams {
+  title: string
+  userId: string
+  folderId?: string | null
+  sourceType: 'pdf' | 'audio' | 'youtube' | 'text'
+  transcription?: string
+  audioUrl?: string | null
+  url?: string
+  imageUrl?: string
+  contentStatus?: 'processing' | 'completed' | 'failed' | 'draft'
+}
+
+export interface CreateContentBlockParams {
+  noteId: string
+  type: string
+  title: string
+  content: any
+  icon?: string
+  iconColor?: string
+  sortOrder?: number
+}
+
+export interface ContentBlock {
+  id: string
+  note_id: string
+  type: string
+  title: string
+  content: any
+  icon?: string
+  icon_color?: string
+  sort_order: number
+}
+
 export class NotesService {
   /**
    * Get recent notes for dashboard
@@ -197,4 +230,121 @@ export class NotesService {
       return false
     }
   }
+
+  /**
+   * Create a new note
+   */
+  async createNote(params: CreateNoteParams): Promise<Note> {
+    try {
+      const result = await query(`
+        INSERT INTO notes (
+          title, user_id, folder_id, source_type, 
+          transcription, url, image_url, content_status
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        RETURNING *
+      `, [
+        params.title,
+        params.userId,
+        params.folderId || null,
+        params.sourceType,
+        params.transcription || null,
+        params.url || null,
+        params.imageUrl || null,
+        params.contentStatus || 'completed'
+      ])
+
+      const notes = result as unknown as any[]
+      if (notes.length === 0) {
+        throw new Error('Failed to create note')
+      }
+
+      return {
+        id: notes[0].id,
+        user_id: notes[0].user_id,
+        title: notes[0].title,
+        source_type: notes[0].source_type,
+        content_status: notes[0].content_status,
+        transcription: notes[0].transcription,
+        url: notes[0].url,
+        created_at: notes[0].created_at,
+        updated_at: notes[0].updated_at
+      }
+    } catch (error) {
+      console.error('Failed to create note:', error)
+      throw new Error('Failed to create note')
+    }
+  }
+
+  /**
+   * Create a content block for a note
+   */
+  async createContentBlock(params: CreateContentBlockParams): Promise<ContentBlock> {
+    try {
+      const result = await query(`
+        INSERT INTO content_blocks (
+          note_id, type, title, content, icon, icon_color, sort_order
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7)
+        RETURNING *
+      `, [
+        params.noteId,
+        params.type,
+        params.title,
+        JSON.stringify(params.content),
+        params.icon || null,
+        params.iconColor || null,
+        params.sortOrder || 0
+      ])
+
+      const blocks = result as unknown as any[]
+      if (blocks.length === 0) {
+        throw new Error('Failed to create content block')
+      }
+
+      const block = blocks[0]
+      return {
+        id: block.id,
+        note_id: block.note_id,
+        type: block.type,
+        title: block.title,
+        content: typeof block.content === 'string' ? JSON.parse(block.content) : block.content,
+        icon: block.icon,
+        icon_color: block.icon_color,
+        sort_order: block.sort_order || 0
+      }
+    } catch (error) {
+      console.error('Failed to create content block:', error)
+      throw new Error('Failed to create content block')
+    }
+  }
+
+  /**
+   * Get content blocks for a note
+   */
+  async getContentBlocks(noteId: string): Promise<ContentBlock[]> {
+    try {
+      const result = await query(`
+        SELECT * FROM content_blocks 
+        WHERE note_id = $1 
+        ORDER BY sort_order ASC
+      `, [noteId])
+
+      const blocks = result as unknown as any[]
+      return blocks.map(block => ({
+        id: block.id,
+        note_id: block.note_id,
+        type: block.type,
+        title: block.title,
+        content: typeof block.content === 'string' ? JSON.parse(block.content) : block.content,
+        icon: block.icon,
+        icon_color: block.icon_color,
+        sort_order: block.sort_order || 0
+      }))
+    } catch (error) {
+      console.error('Failed to get content blocks:', error)
+      return []
+    }
+  }
 }
+
+// Export singleton instance
+export const notesService = new NotesService();
