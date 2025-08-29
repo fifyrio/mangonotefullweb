@@ -123,39 +123,39 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-dark-primary flex">
+    <div className="min-h-screen bg-gradient-surface flex">
       <Sidebar className="w-80 shrink-0" isLoggedIn={false} />
       
       <main className="flex-1 overflow-hidden">
         {/* Header */}
-        <div className="glass-effect border-b border-white/5 px-8 py-6">
-          <div className="flex items-center gap-2 text-sm text-gray-400">
+        <div className="bg-surface-elevated border-b border-border-light px-8 py-6 shadow-sm">
+          <div className="flex items-center gap-2 text-sm text-text-muted">
             <span className="font-medium">All notes</span>
             <span className="opacity-50">/</span>
-            <span className="text-mango-400 font-medium">My notes</span>
+            <span className="text-mango-secondary font-medium">My notes</span>
           </div>
         </div>
 
         <div className="p-10">
           {/* New note section */}
           <div className="mb-16">
-            <h2 className="text-4xl font-bold text-gradient mb-10">New note</h2>
+            <h2 className="text-4xl font-bold text-gradient-mango mb-10">New note</h2>
             
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
               {noteCreationOptions.map((option) => (
                 <button
                   key={option.title}
                   onClick={() => setActiveModal(option.modalType)}
-                  className="card p-8 group relative overflow-hidden"
+                  className="card card-interactive p-8 group relative overflow-hidden"
                 >
                   <div className="text-center relative z-10">
                     <div className={`text-5xl mb-6 ${option.color} group-hover:scale-125 transition-all duration-500 drop-shadow-lg`}>
                       {option.icon}
                     </div>
-                    <h3 className="text-white font-bold mb-3 text-lg group-hover:text-mango-400 transition-colors duration-300">{option.title}</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">{option.description}</p>
+                    <h3 className="text-text-primary font-bold mb-3 text-lg group-hover:text-mango-secondary transition-colors duration-300">{option.title}</h3>
+                    <p className="text-text-muted text-sm leading-relaxed">{option.description}</p>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-mango-primary/5 to-mango-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
               ))}
             </div>
@@ -163,7 +163,7 @@ export default function DashboardPage() {
 
           {/* My notes section */}
           <div>
-            <h2 className="text-4xl font-bold text-gradient mb-10">My notes</h2>
+            <h2 className="text-4xl font-bold text-gradient-mango mb-10">My notes</h2>
             
             {isLoading ? (
               <div className="space-y-6">
@@ -171,12 +171,12 @@ export default function DashboardPage() {
                   <div key={i} className="card p-8 animate-pulse">
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
-                        <div className="h-6 bg-gray-700 rounded mb-3 w-3/4"></div>
-                        <div className="h-4 bg-gray-700 rounded mb-2 w-full"></div>
-                        <div className="h-4 bg-gray-700 rounded mb-4 w-2/3"></div>
+                        <div className="h-6 bg-border-medium rounded mb-3 w-3/4"></div>
+                        <div className="h-4 bg-border-medium rounded mb-2 w-full"></div>
+                        <div className="h-4 bg-border-medium rounded mb-4 w-2/3"></div>
                         <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-gray-700 rounded-full"></div>
-                          <div className="h-3 bg-gray-700 rounded w-24"></div>
+                          <div className="w-2 h-2 bg-border-medium rounded-full"></div>
+                          <div className="h-3 bg-border-medium rounded w-24"></div>
                         </div>
                       </div>
                     </div>
@@ -189,49 +189,49 @@ export default function DashboardPage() {
                   <Link
                     key={note.id}
                     href={`/notes/${note.id}`}
-                    className="block card p-8 group relative overflow-hidden"
+                    className="block card card-interactive p-8 group relative overflow-hidden"
                   >
                     <div className="flex items-center justify-between relative z-10">
                       <div className="flex-1">
-                        <h3 className="text-white font-bold text-xl mb-3 group-hover:text-mango-400 transition-colors duration-300">
+                        <h3 className="text-text-primary font-bold text-xl mb-3 group-hover:text-mango-secondary transition-colors duration-300">
                           {note.title}
                         </h3>
-                        <p className="text-gray-400 text-base mb-4 line-clamp-2 leading-relaxed">
+                        <p className="text-text-muted text-base mb-4 line-clamp-2 leading-relaxed">
                           {note.preview}
                         </p>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-4">
                             <div className="flex items-center gap-2">
-                              <div className="w-2 h-2 bg-mango-500 rounded-full"></div>
-                              <p className="text-gray-500 text-sm font-medium">
+                              <div className="w-2 h-2 bg-mango-primary rounded-full"></div>
+                              <p className="text-text-muted text-sm font-medium">
                                 {formatDate(note.updated_at)}
                               </p>
                             </div>
-                            <div className="flex items-center gap-4 text-xs text-gray-500">
+                            <div className="flex items-center gap-4 text-xs text-text-muted">
                               <span>📄 {note.content_blocks_count} blocks</span>
                               <span>🎴 {note.flashcards_count} cards</span>
                             </div>
                           </div>
-                          <div className="text-xs text-gray-600 bg-gray-800/50 px-2 py-1 rounded">
+                          <div className="text-xs text-text-muted bg-surface-tertiary px-2 py-1 rounded">
                             {note.source_type}
                           </div>
                         </div>
                       </div>
-                      <div className="ml-8 text-gray-400 group-hover:text-mango-400 transition-all duration-300 transform group-hover:translate-x-2">
+                      <div className="ml-8 text-text-muted group-hover:text-mango-secondary transition-all duration-300 transform group-hover:translate-x-2">
                         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </div>
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-mango-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-mango-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </Link>
                 ))}
               </div>
             ) : (
               <div className="card p-12 text-center">
                 <div className="text-6xl mb-6 opacity-30">📝</div>
-                <h3 className="text-xl text-gray-400 mb-4">No notes yet</h3>
-                <p className="text-gray-500 mb-6">
+                <h3 className="text-xl text-text-secondary mb-4">No notes yet</h3>
+                <p className="text-text-muted mb-6">
                   Upload a PDF, record audio, or create your first note to get started.
                 </p>
                 <button

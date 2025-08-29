@@ -5,58 +5,172 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
+  :root {
+    /* Mango AI Note CSS Variables for dynamic theming */
+    --mango-primary: #FFD84D;
+    --mango-secondary: #E78822;
+    --text-primary: #1A1F2C;
+    --text-secondary: #4C5464;
+    --surface-primary: #FFFFFF;
+    --surface-secondary: #FFFDF6;
+  }
+  
   body {
-    @apply bg-dark-primary text-white font-sans min-h-screen antialiased;
+    @apply bg-gradient-surface text-text-primary font-sans min-h-screen antialiased;
   }
   
   * {
-    @apply border-gray-600/20;
+    @apply border-border-light;
   }
   
   html {
     scroll-behavior: smooth;
   }
+  
+  /* Smooth transitions for all interactive elements */
+  button, a, input, select, textarea {
+    @apply transition-all duration-200 ease-in-out;
+  }
 }
 
 @layer components {
+  /* === PRIMARY BUTTONS === */
   .btn-primary {
-    @apply bg-gradient-to-r from-mango-500 to-mango-400 hover:from-mango-600 hover:to-mango-500 text-black font-semibold px-8 py-3.5 rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-mango-500/25 active:scale-[0.98];
+    @apply bg-gradient-mango hover:shadow-xl hover:shadow-mango-primary/30 text-text-primary font-semibold px-8 py-3.5 rounded-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] border-0 focus:ring-4 focus:ring-mango-primary/20;
   }
   
+  .btn-primary-soft {
+    @apply bg-mango-100 hover:bg-mango-200 text-text-primary font-medium px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98];
+  }
+  
+  /* === SECONDARY BUTTONS === */
   .btn-secondary {
-    @apply bg-dark-tertiary/80 backdrop-blur-sm hover:bg-dark-surface text-white font-medium px-8 py-3.5 rounded-xl border border-gray-600/30 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-white/5 active:scale-[0.98];
+    @apply bg-surface-elevated hover:bg-surface-tertiary text-text-primary font-medium px-8 py-3.5 rounded-xl border border-border-medium transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] focus:ring-4 focus:ring-mango-primary/10;
   }
   
+  .btn-outline {
+    @apply bg-transparent hover:bg-mango-50 text-mango-secondary border-2 border-mango-secondary hover:border-mango-primary font-medium px-8 py-3.5 rounded-xl transition-all duration-300;
+  }
+  
+  /* === FORM INPUTS === */
   .input-field {
-    @apply bg-dark-tertiary/60 backdrop-blur-sm border border-gray-600/30 rounded-xl px-5 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-mango-500/60 focus:bg-dark-tertiary transition-all duration-300 focus:shadow-lg focus:shadow-mango-500/10;
+    @apply bg-surface-elevated border border-border-light rounded-xl px-5 py-4 text-text-primary placeholder-text-muted focus:outline-none focus:border-mango-primary focus:ring-4 focus:ring-mango-primary/10 transition-all duration-300;
   }
   
+  .input-field-error {
+    @apply border-error focus:border-error focus:ring-error/10;
+  }
+  
+  /* === NAVIGATION === */
   .sidebar-item {
-    @apply flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-dark-tertiary/60 rounded-2xl transition-all duration-300 cursor-pointer relative overflow-hidden;
+    @apply flex items-center gap-3 px-4 py-3 text-text-secondary hover:text-text-primary hover:bg-surface-tertiary rounded-2xl transition-all duration-300 cursor-pointer relative;
   }
   
   .sidebar-item::before {
     content: '';
-    @apply absolute left-0 top-0 w-1 h-full bg-mango-500 transition-all duration-300 transform scale-y-0 origin-top;
+    @apply absolute left-0 top-0 w-1 h-full bg-mango-primary rounded-r-full transition-all duration-300 transform scale-y-0 origin-center;
   }
   
   .sidebar-item.active {
-    @apply text-mango-500 bg-dark-tertiary/80 backdrop-blur-sm shadow-lg shadow-mango-500/10;
+    @apply text-mango-secondary bg-mango-50 font-medium;
   }
   
   .sidebar-item.active::before {
     @apply scale-y-100;
   }
   
+  /* === CARDS & SURFACES === */
   .card {
-    @apply bg-dark-tertiary/60 backdrop-blur-sm border border-gray-700/30 rounded-2xl transition-all duration-300 hover:bg-dark-surface/80 hover:border-gray-600/40 hover:shadow-xl hover:shadow-black/20 hover:transform hover:scale-[1.02];
+    @apply bg-gradient-card border border-border-light rounded-2xl p-6 shadow-sm hover:shadow-xl hover:shadow-mango-primary/5 transition-all duration-300 hover:transform hover:scale-[1.01];
   }
   
+  .card-elevated {
+    @apply bg-surface-elevated shadow-lg shadow-mango-primary/5 border border-border-light rounded-2xl;
+  }
+  
+  .card-interactive {
+    @apply cursor-pointer;
+  }
+  
+  .card-interactive:hover {
+    @apply shadow-2xl -translate-y-1;
+    box-shadow: 0 25px 50px -12px rgba(255, 216, 77, 0.1);
+  }
+  
+  /* === GLASS EFFECTS === */
   .glass-effect {
-    @apply backdrop-blur-xl bg-dark-secondary/80 border border-white/10;
+    @apply backdrop-blur-xl bg-surface-primary/80 border border-border-light/50 shadow-xl;
   }
   
-  .text-gradient {
-    @apply bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent;
+  .glass-mango {
+    @apply backdrop-blur-xl bg-mango-primary/10 border border-mango-primary/20;
+  }
+  
+  /* === TEXT STYLES === */
+  .text-gradient-mango {
+    @apply bg-gradient-to-r from-mango-primary to-mango-secondary bg-clip-text text-transparent;
+  }
+  
+  .text-heading {
+    @apply text-text-primary font-semibold;
+  }
+  
+  .text-body {
+    @apply text-text-secondary;
+  }
+  
+  .text-muted {
+    @apply text-text-muted;
+  }
+  
+  /* === STATUS INDICATORS === */
+  .status-success {
+    @apply bg-success/10 text-success border border-success/20 rounded-full px-3 py-1 text-sm font-medium;
+  }
+  
+  .status-warning {
+    @apply bg-warning/10 text-warning border border-warning/20 rounded-full px-3 py-1 text-sm font-medium;
+  }
+  
+  .status-error {
+    @apply bg-error/10 text-error border border-error/20 rounded-full px-3 py-1 text-sm font-medium;
+  }
+  
+  /* === UTILITY CLASSES === */
+  .shadow-mango {
+    @apply shadow-xl shadow-mango-primary/15;
+  }
+  
+  .border-mango {
+    @apply border-mango-primary;
+  }
+  
+  .ring-mango {
+    @apply ring-4 ring-mango-primary/20;
+  }
+  
+  /* === ANIMATIONS === */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

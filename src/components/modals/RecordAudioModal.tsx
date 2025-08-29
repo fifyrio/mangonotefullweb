@@ -124,23 +124,23 @@ export default function RecordAudioModal({ isOpen, onClose, onGenerate }: Record
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-dark-secondary rounded-2xl p-8 max-w-md w-full mx-4 relative">
+    <div className="fixed inset-0 bg-text-primary bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-surface-elevated rounded-2xl p-8 max-w-md w-full mx-4 relative shadow-2xl border border-border-light">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+          className="absolute top-4 right-4 text-text-muted hover:text-text-primary transition-colors"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
         
-        {/* 错误提示 */}
+        {/* Error Message */}
         {error && (
-          <div className="mb-6 p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
+          <div className="mb-6 p-4 bg-error/10 border border-error/30 rounded-lg">
             <div className="flex items-start space-x-2">
-              <i className="ri-error-warning-line text-red-400 flex-shrink-0 mt-0.5"></i>
-              <div className="text-red-400 text-sm whitespace-pre-line">
+              <i className="ri-error-warning-line text-error flex-shrink-0 mt-0.5"></i>
+              <div className="text-error text-sm whitespace-pre-line">
                 {error}
               </div>
             </div>
@@ -148,26 +148,26 @@ export default function RecordAudioModal({ isOpen, onClose, onGenerate }: Record
         )}
 
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-8">Record Audio</h2>
+          <h2 className="text-2xl font-bold text-text-primary mb-8">Record Audio</h2>
           
           <div className="mb-8">
             <div className={`w-32 h-32 mx-auto mb-6 rounded-full flex items-center justify-center ${
-              isRecording ? 'bg-red-500 animate-pulse' : 'bg-dark-tertiary'
+              isRecording ? 'bg-error animate-pulse' : 'bg-surface-tertiary border border-border-light'
             }`}>
               {isRecording ? (
                 <div className="w-8 h-8 bg-white rounded-full animate-pulse"></div>
               ) : audioBlob ? (
-                <svg className="w-16 h-16 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-16 h-16 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               ) : (
-                <svg className="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-16 h-16 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
                 </svg>
               )}
             </div>
             
-            <p className="text-gray-300 mb-4">
+            <p className="text-text-secondary mb-4">
               {isRecording ? 'Recording in progress...' : audioBlob ? 'Recording completed' : 'Click the button below to start recording'}
             </p>
             
@@ -177,8 +177,8 @@ export default function RecordAudioModal({ isOpen, onClose, onGenerate }: Record
                 disabled={isLoading}
                 className={`px-8 py-3 rounded-lg font-medium transition-colors ${
                   isLoading 
-                    ? 'bg-gray-600 text-gray-300 cursor-not-allowed' 
-                    : 'bg-red-500 text-white hover:bg-red-600'
+                    ? 'bg-border-medium text-text-muted cursor-not-allowed' 
+                    : 'bg-error text-surface-primary hover:bg-error/90'
                 }`}
               >
                 {isLoading ? (
@@ -195,7 +195,7 @@ export default function RecordAudioModal({ isOpen, onClose, onGenerate }: Record
             {isRecording && (
               <button
                 onClick={stopRecording}
-                className="bg-gray-600 hover:bg-gray-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+                className="bg-border-medium hover:bg-text-muted text-surface-primary px-8 py-3 rounded-lg font-medium transition-colors"
               >
                 Stop Recording
               </button>
@@ -204,14 +204,14 @@ export default function RecordAudioModal({ isOpen, onClose, onGenerate }: Record
 
           {audioBlob && (
             <div className="mb-6">
-              <div className="bg-dark-tertiary rounded-lg p-4 mb-4">
+              <div className="bg-surface-tertiary border border-border-light rounded-lg p-4 mb-4">
                 <audio controls className="w-full">
                   <source src={URL.createObjectURL(audioBlob)} />
                 </audio>
               </div>
               <button
                 onClick={resetRecording}
-                className="text-sm text-gray-400 hover:text-white transition-colors"
+                className="text-sm text-text-muted hover:text-text-primary transition-colors"
               >
                 Re-record
               </button>
@@ -219,13 +219,13 @@ export default function RecordAudioModal({ isOpen, onClose, onGenerate }: Record
           )}
 
           <div className="mb-6">
-            <label className="block text-left text-white font-medium mb-2">
+            <label className="block text-left text-text-primary font-medium mb-2">
               🧠 Note Language
             </label>
             <select 
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              className="w-full p-3 border border-gray-600 rounded-lg bg-dark-tertiary text-white focus:border-mango-500 focus:outline-none"
+              className="input-field"
             >
               <option value="auto">🤖 Auto detect</option>
               <option value="en">🇺🇸 English</option>
@@ -233,7 +233,7 @@ export default function RecordAudioModal({ isOpen, onClose, onGenerate }: Record
               <option value="es">🇪🇸 Español</option>
               <option value="fr">🇫🇷 Français</option>
             </select>
-            <p className="text-gray-400 text-sm mt-2">
+            <p className="text-text-muted text-sm mt-2">
               You can use AI auto-detect to detect the audio language and note generation language.
             </p>
           </div>
@@ -241,10 +241,8 @@ export default function RecordAudioModal({ isOpen, onClose, onGenerate }: Record
           <button
             onClick={handleGenerate}
             disabled={!audioBlob}
-            className={`w-full py-4 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors ${
-              audioBlob
-                ? 'bg-mango-500 hover:bg-mango-600 text-black'
-                : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+            className={`btn-primary w-full py-4 flex items-center justify-center gap-2 ${
+              audioBlob ? '' : 'opacity-50 cursor-not-allowed'
             }`}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -253,8 +251,8 @@ export default function RecordAudioModal({ isOpen, onClose, onGenerate }: Record
             Generate Notes
           </button>
           
-          {/* 设备状态提示 */}
-          <div className="mt-4 text-xs text-gray-400 text-center space-y-1">
+          {/* Device Status Tips */}
+          <div className="mt-4 text-xs text-text-muted text-center space-y-1">
             <p>💡 Ensure microphone is connected and browser has permission</p>
             <p>🔒 Requires HTTPS or localhost environment</p>
           </div>
