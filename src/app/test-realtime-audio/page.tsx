@@ -151,10 +151,10 @@ export default function TestRealtimeAudioPage() {
         },
         {
           onTranscriptionChunk: (chunk) => {
-            addTestResult(`📝 Transcription: "${chunk.text}" (${Math.round(chunk.confidence * 100)}%)`)
+            addTestResult(`📝 Transcription: "${chunk.text}" (${Math.round((chunk.confidence || 0) * 100)}%)`)
           },
           onVoiceCommand: (command) => {
-            addTestResult(`🎤 Voice command: ${command.command} (${Math.round(command.confidence * 100)}%)`)
+            addTestResult(`🎤 Voice command: ${command.command} (${Math.round((command.confidence || 0) * 100)}%)`)
           },
           onError: (error) => {
             addTestResult(`❌ Service error: ${error.message}`)

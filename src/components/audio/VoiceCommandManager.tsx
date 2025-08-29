@@ -256,10 +256,11 @@ export default function VoiceCommandManager({
     }
   }
 
-  // Expose the processing method
-  React.useImperativeHandle(React.forwardRef((props, ref) => ({
-    processTranscription
-  })), [processTranscription])
+  // Expose the processing method via ref (if needed)
+  // This component doesn't currently use forwardRef, so this is commented out
+  // React.useImperativeHandle(ref, () => ({
+  //   processTranscription
+  // }), [processTranscription])
 
   const getCommandStatusIcon = (entry: CommandHistory) => {
     if (entry.error) return 'ri-error-warning-line text-red-400'

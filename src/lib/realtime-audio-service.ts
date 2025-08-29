@@ -110,20 +110,23 @@ export class RealtimeAudioService {
       console.log('Audio context created');
 
       // Setup MediaRecorder with optimal settings
-      const options: MediaRecorderOptions = {
-        mimeType: 'audio/webm;codecs=opus'
-      };
+      let mimeType = 'audio/webm;codecs=opus';
 
       // Fallback for different browsers
-      if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+      if (!MediaRecorder.isTypeSupported(mimeType)) {
         console.log('opus not supported, trying mp4');
-        options.mimeType = 'audio/mp4';
+        mimeType = 'audio/mp4';
       }
-      if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+      if (!MediaRecorder.isTypeSupported(mimeType)) {
         console.log('mp4 not supported, trying wav');
-        options.mimeType = 'audio/wav';
+        mimeType = 'audio/wav';
       }
-      if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+
+      const options: MediaRecorderOptions = {
+        mimeType
+      };
+      
+      if (!MediaRecorder.isTypeSupported(mimeType)) {
         console.log('wav not supported, using default');
         delete options.mimeType;
       }
