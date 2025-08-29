@@ -124,7 +124,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gradient-surface flex">
-      <Sidebar className="w-80 shrink-0" isLoggedIn={false} />
+      <Sidebar className="w-80 shrink-0" />
       
       <main className="flex-1 overflow-hidden">
         {/* Header */}

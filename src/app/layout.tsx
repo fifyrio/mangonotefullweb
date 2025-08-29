@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import {ReactNode} from 'react';
+import { ReactNode } from 'react'
+import { AuthProvider } from '@/lib/auth-context'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,9 +17,11 @@ type Props = {
 
 export default function RootLayout({children}: Props) {
   return (
-    <html className="dark" suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
